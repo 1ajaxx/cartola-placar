@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placar da Liga dos Brabos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Placar da Liga dos Brabos</h1>
+        <table id="placar">
+            <thead>
+                <tr>
+                    <th>Jogador</th>
+                    <th>Pontos</th>
+                    <th>Detalhes</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td contenteditable="true">Brabo 1</td>
+                    <td contenteditable="true">12</td>
+                    <td contenteditable="true">3 Morenas, 1 Ruiva</td>
+                    <td>
+                        <button onclick="toggleEdit(this)">Editar</button>
+                        <button onclick="removeRow(this)">Remover</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Brabo 2</td>
+                    <td contenteditable="true">10</td>
+                    <td contenteditable="true">2 Galegas, 1 Cacheada</td>
+                    <td>
+                        <button onclick="toggleEdit(this)">Editar</button>
+                        <button onclick="removeRow(this)">Remover</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Brabo 3</td>
+                    <td contenteditable="true">8</td>
+                    <td contenteditable="true">1 Ruiva, 2 Tatuadas</td>
+                    <td>
+                        <button onclick="toggleEdit(this)">Editar</button>
+                        <button onclick="removeRow(this)">Remover</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Brabo 4</td>
+                    <td contenteditable="true">6</td>
+                    <td contenteditable="true">3 Morenas</td>
+                    <td>
+                        <button onclick="toggleEdit(this)">Editar</button>
+                        <button onclick="removeRow(this)">Remover</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Brabo 5</td>
+                    <td contenteditable="true">3</td>
+                    <td contenteditable="true">1 Print de conversa</td>
+                    <td>
+                        <button onclick="toggleEdit(this)">Editar</button>
+                        <button onclick="removeRow(this)">Remover</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function toggleEdit(button) {
+            const row = button.parentElement.parentElement; // Pega a linha do botão
+            const cells = row.querySelectorAll('td:not(:last-child)'); // Pega todas as células, exceto a última (ações)
+            const isEditable = cells[0].isContentEditable; // Verifica se a primeira célula está editável
+
+            cells.forEach(cell => {
+                cell.contentEditable = !isEditable; // Alterna o modo editável
+            });
+
+            button.textContent = isEditable ? 'Salvar' : 'Editar'; // Altera o texto do botão
+        }
+
+        function removeRow(button) {
+            const row = button.parentElement.parentElement; // Pega a linha do botão
+            row.remove(); // Remove a linha
+        }
+    </script>
+</body>
+</html>

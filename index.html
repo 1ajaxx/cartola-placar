@@ -24,7 +24,6 @@
                     <td contenteditable="true">12</td>
                     <td contenteditable="true">3 Morenas, 1 Ruiva</td>
                     <td>
-                        <button class="edit-btn" onclick="toggleEdit(this)">Editar</button>
                         <button class="remove-btn" onclick="removeRow(this)">Remover</button>
                     </td>
                 </tr>
@@ -33,7 +32,6 @@
                     <td contenteditable="true">10</td>
                     <td contenteditable="true">2 Galegas, 1 Cacheada</td>
                     <td>
-                        <button class="edit-btn" onclick="toggleEdit(this)">Editar</button>
                         <button class="remove-btn" onclick="removeRow(this)">Remover</button>
                     </td>
                 </tr>
@@ -42,7 +40,6 @@
                     <td contenteditable="true">8</td>
                     <td contenteditable="true">1 Ruiva, 2 Tatuadas</td>
                     <td>
-                        <button class="edit-btn" onclick="toggleEdit(this)">Editar</button>
                         <button class="remove-btn" onclick="removeRow(this)">Remover</button>
                     </td>
                 </tr>
@@ -51,7 +48,6 @@
                     <td contenteditable="true">6</td>
                     <td contenteditable="true">3 Morenas</td>
                     <td>
-                        <button class="edit-btn" onclick="toggleEdit(this)">Editar</button>
                         <button class="remove-btn" onclick="removeRow(this)">Remover</button>
                     </td>
                 </tr>
@@ -60,7 +56,6 @@
                     <td contenteditable="true">3</td>
                     <td contenteditable="true">1 Print de conversa</td>
                     <td>
-                        <button class="edit-btn" onclick="toggleEdit(this)">Editar</button>
                         <button class="remove-btn" onclick="removeRow(this)">Remover</button>
                     </td>
                 </tr>
@@ -68,29 +63,6 @@
         </table>
     </div>
     <script>
-        function toggleEdit(button) {
-            const row = button.parentElement.parentElement; // Pega a linha do botão
-            const cells = row.querySelectorAll('td:not(:last-child)'); // Pega todas as células, exceto a última (ações)
-            const isEditable = cells[0].isContentEditable; // Verifica se a primeira célula está editável
-
-            cells.forEach(cell => {
-                cell.contentEditable = !isEditable; // Alterna o modo editável
-            });
-
-            button.textContent = isEditable ? 'Salvar' : 'Editar'; // Altera o texto do botão
-            if (isEditable) {
-                // Salva os dados se o modo editável estiver desligado
-                cells.forEach(cell => {
-                    cell.classList.remove('editable');
-                });
-            } else {
-                // Adiciona uma classe para destacar que está editando
-                cells.forEach(cell => {
-                    cell.classList.add('editable');
-                });
-            }
-        }
-
         function removeRow(button) {
             const row = button.parentElement.parentElement; // Pega a linha do botão
             row.remove(); // Remove a linha
@@ -98,4 +70,3 @@
     </script>
 </body>
 </html>
-

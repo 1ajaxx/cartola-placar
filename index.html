@@ -18,55 +18,72 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td contenteditable="true">Brabo 1</td>
-                    <td contenteditable="true">12</td>
-                    <td contenteditable="true">3 Morenas, 1 Ruiva</td>
-                    <td>
-                        <button class="remove-btn" onclick="removeRow(this)">Remover</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td contenteditable="true">Brabo 2</td>
-                    <td contenteditable="true">10</td>
-                    <td contenteditable="true">2 Galegas, 1 Cacheada</td>
-                    <td>
-                        <button class="remove-btn" onclick="removeRow(this)">Remover</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td contenteditable="true">Brabo 3</td>
-                    <td contenteditable="true">8</td>
-                    <td contenteditable="true">1 Ruiva, 2 Tatuadas</td>
-                    <td>
-                        <button class="remove-btn" onclick="removeRow(this)">Remover</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td contenteditable="true">Brabo 4</td>
-                    <td contenteditable="true">6</td>
-                    <td contenteditable="true">3 Morenas</td>
-                    <td>
-                        <button class="remove-btn" onclick="removeRow(this)">Remover</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td contenteditable="true">Brabo 5</td>
-                    <td contenteditable="true">3</td>
-                    <td contenteditable="true">1 Print de conversa</td>
-                    <td>
-                        <button class="remove-btn" onclick="removeRow(this)">Remover</button>
-                    </td>
-                </tr>
+            <tbody id="placar-body">
+                <!-- As linhas serão geradas aqui pelo JavaScript -->
             </tbody>
         </table>
+        <button id="add-btn">Adicionar Jogador</button>
     </div>
     <script>
+        // Função para carregar os dados do Local Storage
+        function loadData() {
+            const placarData = JSON.parse(localStorage.getItem('placar')) || [];
+            const placarBody = document.getElementById('placar-body');
+            placarBody.innerHTML = '';
+
+            placarData.forEach((jogador, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td contenteditable="true" onblur="saveData()"> ${jogador.nome} </td>
+                    <td contenteditable="true" onblur="saveData()"> ${jogador.pontos} </td>
+                    <td contenteditable="true" onblur="saveData()"> ${jogador.detalhes} </td>
+                    <td>
+                        <button class="remove-btn" onclick="removeRow(this)">Remover</button>
+                    </td>
+                `;
+                placarBody.appendChild(row);
+            });
+        }
+
+        // Função para salvar os dados no Local Storage
+        function saveData() {
+            const placarRows = document.querySelectorAll('#placar-body tr');
+            const placarData = [];
+
+            placarRows.forEach(row => {
+                const nome = row.cells[0].innerText;
+                const pontos = row.cells[1].innerText;
+                const detalhes = row.cells[2].innerText;
+                placarData.push({ nome, pontos, detalhes });
+            });
+
+            localStorage.setItem('placar', JSON.stringify(placarData));
+        }
+
+        // Função para remover uma linha da tabela
         function removeRow(button) {
             const row = button.parentElement.parentElement; // Pega a linha do botão
             row.remove(); // Remove a linha
+            saveData(); // Atualiza o Local Storage
         }
+
+        // Função para adicionar um novo jogador
+        document.getElementById('add-btn').addEventListener('click', () => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td contenteditable="true" onblur="saveData()">Novo Jogador</td>
+                <td contenteditable="true" onblur="saveData()">0</td>
+                <td contenteditable="true" onblur="saveData()">Detalhes</td>
+                <td>
+                    <button class="remove-btn" onclick="removeRow(this)">Remover</button>
+                </td>
+            `;
+            document.getElementById('placar-body').appendChild(row);
+            saveData(); // Atualiza o Local Storage
+        });
+
+        // Carrega os dados ao iniciar
+        loadData();
     </script>
 </body>
 </html>

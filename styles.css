@@ -1,7 +1,7 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: 'Arial', sans-serif;
+    background-color: #e9ecef;
+    color: #495057;
     margin: 0;
     padding: 0;
 }
@@ -12,44 +12,92 @@ body {
     padding: 20px;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 h1 {
     text-align: center;
+    color: #4CAF50;
+    margin-bottom: 20px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #4CAF50;
+    color: white;
 }
 
 th, td {
-    padding: 10px;
+    padding: 12px;
     text-align: left;
     border: 1px solid #ddd;
 }
 
-th {
-    background-color: #4CAF50;
-    color: white;
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
 }
 
 button {
-    padding: 5px 10px;
+    padding: 8px 12px;
     margin-right: 5px;
     border: none;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #45a049;
+.edit-btn {
+    background-color: #007bff;
+    color: white;
 }
 
-button:active {
-    background-color: #3e8e41;
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.edit-btn:active {
+    background-color: #004085;
+}
+
+.remove-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.remove-btn:hover {
+    background-color: #c82333;
+}
+
+.remove-btn:active {
+    background-color: #bd2130;
+}
+
+td[contenteditable="true"] {
+    background-color: #f9f9f9;
+}
+
+td.editable {
+    border: 2px solid #007bff; /* Borda azul para células editáveis */
+    background-color: #e7f3ff; /* Cor de fundo azul claro */
+}
+
+td {
+    transition: background-color 0.2s ease;
 }
